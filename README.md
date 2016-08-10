@@ -14,7 +14,7 @@ export default class MyComponent extends BaseComponent {
 ## Available features
 
 ### ._refCallback(refKey)
-String refs are deprecated. So you need to provide function binded to your component. Or just ...
+String refs are deprecated. So you need to provide function bound to your component. Or just ...
 
 ```js
 render() {
