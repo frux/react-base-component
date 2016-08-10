@@ -1,0 +1,58 @@
+{
+  "name": "react-base-component",
+  "version": "0.0.0",
+  "description": "Base React component extended by some helpful features",
+  "main": "index.js",
+  "scripts": {
+    "test": "xo && ava"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/frux/react-base-component.git"
+  },
+  "keywords": [
+    "react",
+    "base",
+    "component"
+  ],
+  "author": "frux",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/frux/react-base-component/issues"
+  },
+  "homepage": "https://github.com/frux/react-base-component#readme",
+  "xo": {
+    "esnext": true,
+    "extends": "xo-react",
+    "rules": {
+      "react/jsx-filename-extension": 0
+    }
+  },
+  "ava": {
+    "require": [
+      "babel-register"
+    ],
+    "babel": "inherit"
+  },
+  "babel": {
+    "presets": [
+      "react",
+      "es2015",
+      "stage-0"
+    ]
+  },
+  "devDependencies": {
+    "ava": "^0.16.0",
+    "babel-register": "^6.11.6",
+    "enzyme": "^2.4.1",
+    "eslint-config-xo-react": "^0.9.0",
+    "eslint-plugin-react": "^6.0.0",
+    "react": "^15.3.0",
+    "react-addons-test-utils": "^15.3.0",
+    "react-dom": "^15.3.0",
+    "xo": "^0.16.0"
+  },
+  "dependencies": {
+    "react": "^15.3.0"
+  }
+}
