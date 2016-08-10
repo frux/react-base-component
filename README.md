@@ -1,4 +1,4 @@
-# react-base-component
+# react-base-component [![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/sindresorhus/xo)
 > Base React component extended by some helpful features
 
 ## Usage
