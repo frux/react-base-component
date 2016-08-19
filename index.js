@@ -40,4 +40,15 @@ export default class BaseComponent extends React.Component {
 		}
 		return this._bindedRefs[name];
 	}
+
+	_isModified(keys, prev, next) {
+		for (const key of keys) {
+			const isSameType = (typeof prev[key] === 'object' && typeof next[key] === 'object');
+			const equalByJSON = isSameType && JSON.stringify(prev[key]) !== JSON.stringify(next[key]);
+			if (equalByJSON || prev[key] !== next[key]) {
+				return true;
+			}
+		}
+		return false;
+	}
 }
