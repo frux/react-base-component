@@ -69,3 +69,12 @@ render() {
 	return (<input type="text" placeholder="Please enter your email" onChange={this._bindToState('email')}/>);
 }
 ```
+
+### ._isModified(keys, prev, next)
+You need to compare some properties or keys of state to understand if they were modified? It's easy. First argument is array of keys you need to compare. The second argument is old props or state. And the third argument is the new props or state.
+
+```js
+componentShouldUpdate(nextProps) {
+	return this._isModified(['items', 'color', 'disabled'], this.props, nextProps);
+}
+```
