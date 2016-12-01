@@ -1,7 +1,7 @@
 import React from 'react';
-import BaseComponent from '../../index.js';
+import baseComponent from '../../index.js';
 
-export default class TestComponent extends BaseComponent {
+export default class TestComponent extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {};
@@ -20,3 +20,4 @@ export default class TestComponent extends BaseComponent {
 		return <div>TEST</div>;
 	}
 }
+baseComponent(TestComponent);

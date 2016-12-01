@@ -4,11 +4,18 @@
 ## Usage
 ```js
 import React from 'react';
-import BaseComponent from 'react-base-component';
+import baseComponent from 'react-base-component';
 
-export default class MyComponent extends BaseComponent {
+// with decorators
+export default @baseComponent class MyComponent extends React.Component {
 	//... your component code
 }
+
+// or without decorators
+export default class MyComponent extends React.Component {
+	//... your component code
+}
+baseComponent(MyComponent);
 ```
 
 ## Available features
@@ -27,7 +34,7 @@ render() {
 Helps you to bind your handlers more comfortably
 
 ```js
-export default class MyComponent extends BaseComponent {
+export default class MyComponent extends React.Component {
 	constructor(props) {
 		// ... your code
 
@@ -45,6 +52,7 @@ export default class MyComponent extends BaseComponent {
 		return (<button onClick={this.handleClick}></button>);
 	}
 }
+baseComponent(MyComponent);
 ```
 
 ### ._bindToState(stateKey, [valueResolver])
@@ -67,14 +75,5 @@ render() {
 
 render() {
 	return (<input type="text" placeholder="Please enter your email" onChange={this._bindToState('email')}/>);
-}
-```
-
-### ._isModified(keys, prev, next)
-You need to compare some properties or keys of state to understand if they were modified? It's easy. First argument is array of keys you need to compare. The second argument is old props or state. And the third argument is the new props or state.
-
-```js
-componentShouldUpdate(nextProps) {
-	return this._isModified(['items', 'color', 'disabled'], this.props, nextProps);
 }
 ```

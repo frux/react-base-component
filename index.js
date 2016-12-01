@@ -1,23 +1,15 @@
 /* eslint no-return-assign: 0 */
-import React from 'react';
+export default function baseComponent(target) {
+	target._bindedRefs = {};
+	target._bindedHandlers = {};
 
-export default class BaseComponent extends React.Component {
-	constructor(props) {
-		super(props);
-		this._bind(
-			'_refCallback'
-		);
-		this._bindedRefs = {};
-		this._bindedHandlers = {};
-	}
-
-	_bind(...args) {
+	target.prototype._bind = function (...args) {
 		args.forEach(handlerName => {
 			this[handlerName] = this[handlerName].bind(this);
 		});
-	}
+	};
 
-	_bindToState(key, resolver) {
+	target.prototype._bindToState = function (key, resolver) {
 		const cachedHandler = this._bindedHandlers[key];
 		if (cachedHandler) {
 			return cachedHandler;
@@ -26,9 +18,9 @@ export default class BaseComponent extends React.Component {
 			return e => this.setState({[key]: resolver(e)});
 		}
 		return e => this.setState({[key]: e.target.value});
-	}
+	};
 
-	_refCallback(name, wrapped) {
+	target.prototype._refCallback = function (name, wrapped) {
 		const cachedRef = this._bindedRefs[name];
 		if (cachedRef) {
 			return cachedRef;
@@ -39,16 +31,5 @@ export default class BaseComponent extends React.Component {
 			this._bindedRefs[name] = c => this[name] = c;
 		}
 		return this._bindedRefs[name];
-	}
-
-	_isModified(keys, prev, next) {
-		for (const key of keys) {
-			const isSameType = (typeof prev[key] === 'object' && typeof next[key] === 'object');
-			const equalByJSON = isSameType && JSON.stringify(prev[key]) !== JSON.stringify(next[key]);
-			if (equalByJSON || prev[key] !== next[key]) {
-				return true;
-			}
-		}
-		return false;
-	}
+	};
 }
