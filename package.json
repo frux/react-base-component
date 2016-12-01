@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/frux/react-base-component#readme",
   "xo": {
-    "esnext": true,
+    "esnext": false,
     "extends": "xo-react",
     "rules": {
       "react/jsx-filename-extension": 0
