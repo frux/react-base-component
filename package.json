@@ -1,6 +1,6 @@
 {
   "name": "react-base-component",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "Base React component extended by some helpful features",
   "main": "index.js",
   "scripts": {
