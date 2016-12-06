@@ -10,9 +10,6 @@ function wrappedRef(name, c) {
 }
 
 module.exports = function baseComponent(target) {
-	target._bindedRefs = {};
-	target._bindedHandlers = {};
-
 	target.prototype._bind = function () {
 		var max = arguments.length;
 		var i;
@@ -23,19 +20,24 @@ module.exports = function baseComponent(target) {
 	};
 
 	target.prototype._bindToState = function (key, resolver) {
-		var cachedHandler = this._bindedHandlers[key];
-		if (cachedHandler) {
-			return cachedHandler;
+		if (!this._bindedHandlers) {
+			this._bindedHandlers = {};
 		}
-		resolver = (resolver || defaultResolver).bind(this);
-		return (function (e) {
-			var newState = {};
-			newState[key] = resolver(e);
-			this.setState(newState);
-		}).bind(this);
+		if (!this._bindedHandlers[key]) {
+			resolver = (resolver || defaultResolver).bind(this);
+			this._bindedHandlers[key] = (function (e) {
+				var newState = {};
+				newState[key] = resolver(e);
+				this.setState(newState);
+			}).bind(this);
+		}
+		return this._bindedHandlers[key];
 	};
 
 	target.prototype._refCallback = function (name, wrapped) {
+		if (!this._bindedRefs) {
+			this._bindedRefs = {};
+		}
 		if (!this._bindedRefs[name]) {
 			if (wrapped) {
 				this._bindedRefs[name] = wrappedRef.bind(this, name);
